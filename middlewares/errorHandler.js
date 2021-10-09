@@ -13,9 +13,15 @@ function errorHandler(err, req, res, next) {
             code = 400;
             message = ['User already registered']
             return res.status(code).json({ message })
+        case 'Unauthenticated':
+            code = 401;
+            message = err.message;
+            return res.status(code).json({ message })
         default:
             return res.status(code).json({ message })
     }
+
+
 }
 
 module.exports = errorHandler
