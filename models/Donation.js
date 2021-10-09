@@ -11,22 +11,63 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Donation.belongsTo(models.User, {foreignKey: "userId"})
-      Donation.hasMany(models.Report, {foreignKey: "donationId"})
-      Donation.hasMany(models.Transaction, {foreignKey: "donationId"})
+      Donation.belongsTo(models.User, { foreignKey: "userId" })
+      Donation.hasMany(models.Report, { foreignKey: "donationId" })
+      Donation.hasMany(models.Transaction, { foreignKey: "donationId" })
     }
   };
   Donation.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    targetAmount: DataTypes.STRING,
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'title is required' },
+        notEmpty: { msg: 'title cant be empty' }
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate: {
+        notNull: { msg: 'description is required' },
+        notEmpty: { msg: 'description cant be empty' }
+      }
+    },
+    targetAmount: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate: {
+        notNull: { msg: 'Amount is required' },
+        notEmpty: { msg: "Amount cant be empty" }
+      }
+    },
     userId: DataTypes.INTEGER,
-    lat: DataTypes.INTEGER,
-    long: DataTypes.INTEGER,
+    lat: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'address is required' },
+        notEmpty: { msg: 'address cant be empty' }
+      }
+    },
+    long: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: 'address is required' },
+        notEmpty: { msg: 'address cant be empty' }
+      }
+    },
     balance: DataTypes.INTEGER,
     image: DataTypes.STRING,
     status: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate(instance) {
+        instance.balance = 0
+        instance.status = "incomplete"
+      }
+    },
     sequelize,
     modelName: 'Donation',
   });
