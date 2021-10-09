@@ -168,3 +168,57 @@ describe('register feature', () => {
             .catch(err => console.log(err))
     })
 })
+
+describe('user login test', () => {
+    const userData = {
+        email: 'admin@mail.com',
+        password: 'admin',
+        username: 'admin',
+        phoneNumber: 14045,
+        role: 'admin',
+        address: 'jalan yang lurus'
+    }
+
+    const validParams = {
+        email: 'admin@mail.com',
+        password: 'admin'
+    }
+
+    const invalidParams = {
+        email: 'haha@hihi.com',
+        password: 'hihi'
+    }
+    
+    beforeAll(done => {
+        User.create(userData)
+        .then(() => {
+            done()
+        })
+        .catch(err => {
+            done(err)
+        })
+    })
+
+    test('valid parameters should return access_token and role', (done) => {
+        request(app)
+        .post('/users/login')
+        .send(validParams)
+        .then(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body.role).toBe('admin')
+            expect(res.body).toHaveProperty('access_token', expect.any(String))
+            done()
+        })
+    })
+
+    test('invalid parameters should return error status', (done) => {
+        request(app)
+        .post('/users/login')
+        .send(invalidParams)
+        .then(res => {
+            expect(res.statusCode).toBe(401)
+            expect(res.body.message).toBe('Email / Password incorrect')
+            done()
+        })
+    })
+})
