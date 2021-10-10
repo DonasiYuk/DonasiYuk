@@ -57,6 +57,54 @@ class UserController {
             }) 
         })
     }
+
+    static async userProfile(req, res, next) {
+        try {
+            const { id } = req.user;
+
+            const currentUser = await User.findByPk(id)
+
+            if(!currentUser) {
+                throw {
+                    name: 'Not Found',
+                    message: 'User Not Found'
+                }
+            }
+
+            res.status(200).json({
+                id: currentUser.id,
+                username: currentUser.username,
+                email: currentUser.email,
+                phoneNumber: currentUser.phoneNumber,
+                address: currentUser.address
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async editUser(req, res, next) {
+        try {
+            let { username, email, phoneNumber, address, role} = req.body;
+
+            const updatedUser = await User.update({ username, email, phoneNumber, address, role}, {
+                where: { id: req.user.id },
+                returning: true
+            });
+
+            res.status(200).json(updatedUser[1][0])
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async googleLogin(req, res, next) {
+        try {
+            const idToken = req.body.idToken;
+        } catch (err) {
+            
+        }
+    }
 }
 
 module.exports = UserController;

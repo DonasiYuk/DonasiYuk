@@ -2,6 +2,7 @@ const app = require('../app');
 const request = require('supertest');
 const { User } = require('../models');
 
+let access_token;
 
 beforeAll(() => {
     User.destroy({ where: {}, truncate:true, cascade:true, restartIdentity: true})
@@ -205,6 +206,7 @@ describe('user login test', () => {
         .post('/users/login')
         .send(validParams)
         .then(res => {
+            access_token = res.body.access_token
             expect(res.statusCode).toBe(200)
             expect(res.body.role).toBe('admin')
             expect(res.body).toHaveProperty('access_token', expect.any(String))
@@ -219,6 +221,64 @@ describe('user login test', () => {
         .then(res => {
             expect(res.statusCode).toBe(401)
             expect(res.body.message).toBe('Email / Password incorrect')
+            done()
+        })
+    })
+})
+
+describe('User profile test', () => {
+    test('access user profile without access token should return error', (done) => {
+        request(app)
+        .get('/users/profile')
+        .then(res => {
+            expect(res.statusCode).toBe(401)
+            expect(res.body.message).toBe('Invalid Token')
+            done()
+        })
+    })
+
+    test('access user profile with access token', (done) => {
+        request(app)
+        .get('/users/profile')
+        .set({ access_token })
+        .then(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body).toHaveProperty('id')
+            expect(res.body).toHaveProperty('username')
+            expect(res.body).toHaveProperty('email')
+            done()
+        })
+    })
+})
+
+describe('edit user test', () => {
+    const newUserData = {
+        email: 'admin2@mail.com',
+        username: 'admin2',
+        phoneNumber: 14045,
+        role: 'admin',
+        address: 'jalan yang lurus kekanan'
+    }
+
+    test('edit user without send access token', (done) => {
+        request(app)
+        .put('/users')
+        .then(res => {
+            expect(res.statusCode).toBe(401)
+            expect(res.body.message).toBe('Invalid Token')
+            done()
+        })
+    })
+
+    test('valid parameters should success edit user', (done) => {
+        request(app)
+        .put('/users')
+        .send(newUserData)
+        .set({ access_token })
+        .then(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body.username).toBe(newUserData.username)
+            expect(res.body.email).toBe(newUserData.email)
             done()
         })
     })
