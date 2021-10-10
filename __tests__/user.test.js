@@ -2,6 +2,7 @@ const app = require('../app');
 const request = require('supertest');
 const { User } = require('../models');
 
+
 beforeAll(() => {
     User.destroy({ where: {}, truncate:true, cascade:true, restartIdentity: true})
 })

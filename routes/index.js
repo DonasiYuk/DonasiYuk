@@ -7,5 +7,5 @@ router.get('/', (req, res) => {
 })
 
 router.use('/users', userRouter);
-
+router.use('/', donationRouter)
 module.exports = router;
