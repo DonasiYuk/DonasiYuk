@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const {decode, encode} = require('../helpers/bcryptjs');
 const {sign} = require('../helpers/jwt');
-const fetchGoogleUser = require('../middlewares/googleAuth');
+// const fetchGoogleUser = require('../middlewares/googleAuth');
 
 class UserController {
     static async register(req, res, next) {
