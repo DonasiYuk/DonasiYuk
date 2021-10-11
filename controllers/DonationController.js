@@ -1,4 +1,5 @@
 const { Donation, User, Report } = require('../models')
+const { sendMail } = require('../helpers/nodemailer') // usage: sendMail(email, subject, message)
 
 class DonationController {
 
