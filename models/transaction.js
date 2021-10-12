@@ -11,14 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Transaction.belongsTo(models.Donation, {foreignKey: "donationId"})
-      Transaction.belongsTo(models.User, {foreignKey: "donatorId"})
+      Transaction.belongsTo(models.Donation, { foreignKey: "donationId" })
+      Transaction.belongsTo(models.User, { foreignKey: "donatorId" })
     }
   };
   Transaction.init({
-    amount: DataTypes.INTEGER,
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: { msg: "amount is required" },
+        notEmpty: { msg: "amount can't be empty" }
+      }
+    },
     donatorId: DataTypes.INTEGER,
-    donationId: DataTypes.INTEGER
+    donationId: DataTypes.INTEGER,
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transaction',

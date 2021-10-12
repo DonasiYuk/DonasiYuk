@@ -23,7 +23,8 @@ const authe = async (req, res, next) => {
                 message:'Invalid Token'
             }
         } else {
-            req.user = { id: userCheck.id, role: userCheck.role, email: userCheck.email }
+            console.log(userCheck.id, 'ini id user');
+            req.user = { id: userCheck.id, username: userCheck.username, role: userCheck.role, email: userCheck.email, phoneNumber:userCheck.phoneNumber }
             next()
         }
     } catch (err) {
