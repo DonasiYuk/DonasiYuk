@@ -13,6 +13,10 @@ function errorHandler(err, req, res, next) {
             code = 400;
             message = ['User already registered']
             return res.status(code).json({ message })
+        case 'Transaction error':
+            code = 400;
+            message = err.message;
+            return res.status(code).json({ message })
         case 'Unauthenticated':
             code = 401;
             message = err.message;
