@@ -22,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "google-auth-library": "^7.10.0",
     "jest": "^27.2.4",
     "js-sha512": "^0.8.0",
     "jsonwebtoken": "^8.5.1",

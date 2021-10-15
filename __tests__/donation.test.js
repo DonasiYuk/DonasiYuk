@@ -384,4 +384,59 @@ describe('donation feature', () => {
 
     })
 
+    test('200 GET/donation', done => {
+        request(app)
+            .get('/donations')
+            .then(res => {
+                const { status, body } = res
+                expect(status).toBe(200)
+                expect(body).toEqual(expect.arrayContaining(body));
+                done()
+            })
+    })
+
+    test('200 Put/donation', done => {
+
+        const payload = {
+            title : 'Untuk yayasan', 
+            description : 'donasilah', 
+            targetAmount : 253652, 
+            lat : 12343, 
+            long : 121232
+        }
+
+        request(app)
+            .put('/donations/1')
+            .set('access_token', access_token)
+            .send(payload)
+            .then(res => {
+                const { status, body }= res
+                expect(status).toBe(200)
+                expect(body).toHaveProperty('message')
+                done()
+            })
+    })
+
+    test('404 Put/donation', done => {
+
+        const payload = {
+            title : 'Untuk yayasan', 
+            description : 'donasilah', 
+            targetAmount : 253652, 
+            lat : 12343, 
+            long : 121232
+        }
+
+        request(app)
+            .put('/donations/3')
+            .set('access_token', access_token)
+            .send(payload)
+            .then(res => {
+                const { status, body }= res
+                expect(status).toBe(404)
+                expect(body).toHaveProperty('message')
+                done()
+            })
+    })
+
 })
