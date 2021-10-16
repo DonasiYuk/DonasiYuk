@@ -8,8 +8,8 @@ class DonationController {
     static async createDonation(req, res, next) {
         try {
             const id = req.user.id
-            const { title, description, targetAmount, lat, long } = req.body
-            const newDonation = await Donation.create({ title, description, targetAmount, userId: id, lat, long })
+            const { title, description, targetAmount, lat, long, image } = req.body
+            const newDonation = await Donation.create({ title, image, description, targetAmount, userId: id, lat, long })
             if (newDonation) {
                 res.status(201).json({ newDonation })
             }
@@ -171,6 +171,17 @@ class DonationController {
         }
     }
 
+    static async reporting(req, res, next) {
+        try {
+            const { donationId, image, description } = req.body
+            const newReport = await Report.create({ donationId, image, description })
+            if (newReport) {
+                res.status(201).json({ newReport })
+            }
+        } catch (err) {
+            next(err)
+        }
+    }
 
 }
 
