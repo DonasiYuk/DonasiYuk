@@ -23,7 +23,6 @@ const authe = async (req, res, next) => {
                 message:'Invalid Token'
             }
         } else {
-            console.log(userCheck.id, 'ini id user');
             req.user = { id: userCheck.id, username: userCheck.username, role: userCheck.role, email: userCheck.email, phoneNumber:userCheck.phoneNumber }
             next()
         }
@@ -35,25 +34,17 @@ const authe = async (req, res, next) => {
 const authZ = async (req, res, next) => {
     try {
         const donationId = +req.params.id
-        const userId = +req.user.id
         const role = req.user.role
         if (role === 'admin') {
             const donation = await Donation.findByPk(donationId)
-            if (donation) {
-                if (donation.id === userId) {
-                    next()
-                } else {
-                    throw {
-                        name: 'Forbidden',
-                        message: "You dont have credentials"
-                    }
-                }
-            } else {
+            if (!donation) {
                 throw {
                     name: 'Not Found',
                     message: "Donation Not Found"
                 }
             }
+
+            next()
         } else {
             throw {
                 name: 'Forbidden',

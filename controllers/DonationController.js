@@ -110,7 +110,6 @@ class DonationController {
         try {
             // console.log(req.body);
             const { order_id, status_code, gross_amount, signature_key, transaction_status, } = req.body
-            
 
             let hash = await sha512(`${order_id}${status_code}${gross_amount}${process.env.MIDTRANSKEY}`)
 
@@ -171,6 +170,58 @@ class DonationController {
         }
     }
 
+    static async userDonation(req, res, next) {
+        try {
+            const { id } = req.user;
+            const userDonations = await Donation.findAll({
+                where: {
+                    userId: id
+                }
+            })
+
+            res.status(200).json(userDonations)
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async withdraw(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { withdrawalAmount } = req.body;
+            const { email } = req.user;
+
+            const donation = await Donation.findByPk(id)
+
+            if (!donation) {
+                throw {
+                    name: 'Not Found',
+                    message: "Donation Not found"
+                }
+            }
+
+            const updatedBalance = donation.balance - withdrawalAmount
+
+            const updatedDonation = await Donation.update({ balance: updatedBalance, status: 'complete'}, {
+                where: { id },
+                returning: true
+            })
+
+            if (!updatedDonation) {
+                throw {
+                    name: 'Transaction error',
+                    message: 'Your Withdrawal Process failed'
+                }
+            }
+
+            await sendMail(email, 'Withdrawal Successful', `You've successfully withdrawn Rp.${withdrawalAmount},00 to your Bank account `)
+
+            res.status(200).json(updatedDonation[1][0])
+        } catch (err) {
+            console.log(err);
+            next(err)
+        }
+    }
 
 }
 

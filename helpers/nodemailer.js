@@ -16,7 +16,7 @@ function sendMail(email, subject, message){
         text: message
     }
     
-    return mailTransporter.sendMail(options, function (error, info) {
+     mailTransporter.sendMail(options, function (error, info) {
         if (error) {
             console.log(error);
         } else {

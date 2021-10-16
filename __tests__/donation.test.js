@@ -376,11 +376,12 @@ describe('donation feature', () => {
             .patch('/patchTransaction')
             .send(data)
             .then(res => {
+                console.log(res);
                 expect(res.statusCode).toBe(200)
                 expect(res.body).toHaveProperty('message')
                 done()
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err, '<<<<<<<<<<<'))
 
     })
 
@@ -439,4 +440,65 @@ describe('donation feature', () => {
             })
     })
 
+})
+
+describe('my donation feature', () => {
+    test('should get user donation only', (done) => {
+        request(app)
+            .get('/myDonation')
+            .set('access_token', access_token)
+            .then(res => {
+                expect(res.statusCode).toBe(200)
+                done()
+            })
+    })
+
+    test('should failed get user donation without access token', (done) => {
+        request(app)
+            .get('/myDonation')
+            .then(res => {
+                expect(res.statusCode).toBe(401)
+                expect(res.body).toHaveProperty('message')
+                done()
+            })
+    })
+    
+})
+
+describe('withdraw feature', () => {
+    test('should failed if withdraw without access token', (done) => {
+        request(app)
+            .put('/withdraw/1')
+            .then(res => {
+                expect(res.statusCode).toBe(401)
+                expect(res.body).toHaveProperty('message')
+                done()
+            })
+    })
+
+    test('should failed if there is no donation ', (done) => {
+        request(app)
+            .put('/withdraw/9999')
+            .set('access_token', access_token)
+            .then(res => {
+                expect(res.statusCode).toBe(404)
+                expect(res.body).toHaveProperty('message')
+                done()
+            })
+    })
+    
+    test('should return success', (done) => {
+        request(app)
+        .put('/withdraw/1')
+        .set('access_token', access_token)
+        .send({
+            withdrawalAmount: 0
+        })
+        .then(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body.status).toBe('complete')
+            done()
+        })
+    })
+    
 })
