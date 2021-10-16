@@ -227,7 +227,17 @@ class DonationController {
         try {
             const { donationId, image, description } = req.body
             const newReport = await Report.create({ donationId, image, description })
-            if (newReport) {
+            const donators = await Transaction.findAll({
+                where:{
+                    donationId
+                },
+                include: [User]
+            })
+
+            if (newReport && donators) {
+                donators.forEach(donator => {
+                   sendMail(donator.User.email, 'Donation Report', `The Foundation have upload a report for your donation, Please kindly check the donation page`)
+                })
                 res.status(201).json({ newReport })
             }
         } catch (err) {
