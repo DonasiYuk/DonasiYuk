@@ -27,6 +27,22 @@ class DonationController {
         }
     }
 
+    static async getDonationById(req, res, next){
+        try {
+            const id = req.params.id
+            const getDonation = await Donation.findByPk(id)
+            if (!getDonation) {
+                throw {
+                    name : 'Not Found',
+                    message : 'Donation is not found'
+                }
+            }
+            res.status(200).json(getDonation)
+        } catch (err) {
+            next(err)
+        }
+    }
+
     static async editDonation(req, res, next) {
         const donationId = req.params.id
         const {
