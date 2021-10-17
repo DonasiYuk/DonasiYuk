@@ -236,7 +236,7 @@ describe('User profile test', () => {
             done()
         })
     })
-
+    console.log(access_token, '?????????????');
     test('access user profile with access token', (done) => {
         request(app)
         .get('/users/profile')
@@ -249,6 +249,31 @@ describe('User profile test', () => {
             done()
         })
     })
+})
+
+describe('user transactions history feature', () => {
+    test('should success get history transactions', (done) => {
+        request(app)
+        .get('/users/transactions')
+        .set({ access_token })
+        .then(res => {
+            expect(res.statusCode).toBe(200)
+            expect(res.body).toHaveProperty('Transactions')
+            done()
+        })
+        .catch(console.log())
+    })
+
+    test('should failed get history transactions without access token', (done) => {
+        request(app)
+        .get('/users/transactions')
+        .then(res => {
+            expect(res.statusCode).toBe(401)
+            expect(res.body.message).toBe('Invalid Token')
+            done()
+        })
+    })
+    
 })
 
 describe('edit user test', () => {

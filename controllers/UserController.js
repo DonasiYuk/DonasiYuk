@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Transaction, Donation } = require('../models');
 const {decode, encode} = require('../helpers/bcryptjs');
 const {sign} = require('../helpers/jwt');
 // const fetchGoogleUser = require('../middlewares/googleAuth');
@@ -125,6 +125,23 @@ class UserController {
                 role: user[0].role,
                 userId: user[0].id
             });
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async historyTransaction(req, res, next) {
+        try {
+            const { id } = req.user;
+
+            const userTransactions = await User.findOne({
+                where: { id },
+                include: [{
+                    model: Transaction,
+                    include: [Donation]
+                }]
+            })
+            res.status(200).json(userTransactions)
         } catch (err) {
             next(err)
         }

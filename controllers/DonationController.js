@@ -108,7 +108,7 @@ class DonationController {
     static async patchTransaction(req, res, next) {
         const t = await sequelize.transaction()
         try {
-            // console.log(req.body);
+            console.log(req.body);
             const { order_id, status_code, gross_amount, signature_key, transaction_status, } = req.body
 
             let hash = await sha512(`${order_id}${status_code}${gross_amount}${process.env.MIDTRANSKEY}`)
@@ -176,7 +176,8 @@ class DonationController {
             const userDonations = await Donation.findAll({
                 where: {
                     userId: id
-                }
+                },
+                include: [ User ]
             })
 
             res.status(200).json(userDonations)
@@ -188,9 +189,9 @@ class DonationController {
     static async withdraw(req, res, next) {
         try {
             const { id } = req.params;
-            const { withdrawalAmount } = req.body;
+            // const { withdrawalAmount } = req.body;
             const { email } = req.user;
-
+            
             const donation = await Donation.findByPk(id)
 
             if (!donation) {
@@ -200,9 +201,9 @@ class DonationController {
                 }
             }
 
-            const updatedBalance = donation.balance - withdrawalAmount
+            // const updatedBalance = donation.balance - withdrawalAmount
 
-            const updatedDonation = await Donation.update({ balance: updatedBalance, status: 'complete'}, {
+            const updatedDonation = await Donation.update({ balance: 0, status: 'complete'}, {
                 where: { id },
                 returning: true
             })
@@ -214,7 +215,7 @@ class DonationController {
                 }
             }
 
-            await sendMail(email, 'Withdrawal Successful', `You've successfully withdrawn Rp.${withdrawalAmount},00 to your Bank account `)
+            await sendMail(email, 'Withdrawal Successful', `You've successfully withdrawn Rp.${donation.balance},00 to your Bank account `)
 
             res.status(200).json(updatedDonation[1][0])
         } catch (err) {
