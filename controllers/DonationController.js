@@ -27,6 +27,22 @@ class DonationController {
         }
     }
 
+    static async getDonationById(req, res, next){
+        try {
+            const id = req.params.id
+            const getDonation = await Donation.findByPk(id)
+            if (!getDonation) {
+                throw {
+                    name : 'Not Found',
+                    message : 'Donation is not found'
+                }
+            }
+            res.status(200).json(getDonation)
+        } catch (err) {
+            next(err)
+        }
+    }
+
     static async editDonation(req, res, next) {
         const donationId = req.params.id
         const {
@@ -228,7 +244,17 @@ class DonationController {
         try {
             const { donationId, image, description } = req.body
             const newReport = await Report.create({ donationId, image, description })
-            if (newReport) {
+            const donators = await Transaction.findAll({
+                where:{
+                    donationId
+                },
+                include: [User]
+            })
+
+            if (newReport && donators) {
+                donators.forEach(donator => {
+                   sendMail(donator.User.email, 'Donation Report', `The Foundation have upload a report for your donation, Please kindly check the donation page`)
+                })
                 res.status(201).json({ newReport })
             }
         } catch (err) {
