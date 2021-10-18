@@ -65,7 +65,7 @@ describe('donation feature', () => {
                 expect(res.statusCode).toBe(201)
                 done()
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response))
     })
 
     test('create donation with wrong access_token', (done) => {
