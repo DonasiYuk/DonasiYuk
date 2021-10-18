@@ -361,9 +361,9 @@ describe('donation feature', () => {
             .catch(err => console.log(err))
     })
 
-    test('update transaction succsess', (done) => {
+    test('update transaction Fail', (done) => {
         const data = {
-            amount:10000,
+            amount: 10000,
             order_id: 'Postman-1578568851',
             status_code: 200,
             gross_amount: '10000.00',
@@ -376,7 +376,6 @@ describe('donation feature', () => {
             .patch('/patchTransaction')
             .send(data)
             .then(res => {
-                console.log(res);
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
                 done()
@@ -399,11 +398,11 @@ describe('donation feature', () => {
     test('200 Put/donation', done => {
 
         const payload = {
-            title : 'Untuk yayasan', 
-            description : 'donasilah', 
-            targetAmount : 253652, 
-            lat : 12343, 
-            long : 121232
+            title: 'Untuk yayasan',
+            description: 'donasilah',
+            targetAmount: 253652,
+            lat: 12343,
+            long: 121232
         }
 
         request(app)
@@ -411,7 +410,7 @@ describe('donation feature', () => {
             .set('access_token', access_token)
             .send(payload)
             .then(res => {
-                const { status, body }= res
+                const { status, body } = res
                 expect(status).toBe(200)
                 expect(body).toHaveProperty('message')
                 done()
@@ -421,11 +420,11 @@ describe('donation feature', () => {
     test('404 Put/donation', done => {
 
         const payload = {
-            title : 'Untuk yayasan', 
-            description : 'donasilah', 
-            targetAmount : 253652, 
-            lat : 12343, 
-            long : 121232
+            title: 'Untuk yayasan',
+            description: 'donasilah',
+            targetAmount: 253652,
+            lat: 12343,
+            long: 121232
         }
 
         request(app)
@@ -433,12 +432,47 @@ describe('donation feature', () => {
             .set('access_token', access_token)
             .send(payload)
             .then(res => {
-                const { status, body }= res
+                const { status, body } = res
                 expect(status).toBe(404)
                 expect(body).toHaveProperty('message')
                 done()
             })
     })
+
+    test('success get donation by id', done => {
+
+        request(app)
+            .get('/donations/1')
+            .set('access_token', access_token)
+            .then(res => {
+                expect(res.statusCode).toBe(200)
+                done()
+            })
+    })
+
+    test('404 get/donation by id', done => {
+
+        request(app)
+            .get('/donations/2')
+            .set('access_token', access_token)
+            .then(res => {
+                expect(res.statusCode).toBe(404)
+                expect(res.body).toHaveProperty('message')
+                done()
+            })
+    })
+
+    test('401 get/donation by id', done => {
+
+        request(app)
+            .get('/donations/1')
+            .then(res => {
+                expect(res.statusCode).toBe(401)
+                expect(res.body).toHaveProperty('message')
+                done()
+            })
+    })
+    
 
 })
 
@@ -462,7 +496,7 @@ describe('my donation feature', () => {
                 done()
             })
     })
-    
+
 })
 
 describe('withdraw feature', () => {
@@ -486,19 +520,19 @@ describe('withdraw feature', () => {
                 done()
             })
     })
-    
+
     test('should return success', (done) => {
         request(app)
-        .put('/withdraw/1')
-        .set('access_token', access_token)
-        .send({
-            withdrawalAmount: 0
-        })
-        .then(res => {
-            expect(res.statusCode).toBe(200)
-            expect(res.body.status).toBe('complete')
-            done()
-        })
+            .put('/withdraw/1')
+            .set('access_token', access_token)
+            .send({
+                withdrawalAmount: 0
+            })
+            .then(res => {
+                expect(res.statusCode).toBe(200)
+                expect(res.body.status).toBe('complete')
+                done()
+            })
     })
-    
+
 })

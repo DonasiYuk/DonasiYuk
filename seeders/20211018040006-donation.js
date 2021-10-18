@@ -12,7 +12,9 @@ module.exports = {
         long: 0,
         balance: 0,
         image: "https://images.unsplash.com/photo-1599135343721-6c8d4c1b8b58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1385&q=80",
-        status: "incomplete"
+        status: "incomplete",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Bantu Avianto memenuhi keperluan jambannya",
@@ -23,7 +25,9 @@ module.exports = {
         long: 0,
         balance: 0,
         image: "https://akwnulis.files.wordpress.com/2017/04/1491132162-picsay.jpg",
-        status: "incomplete"
+        status: "incomplete",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Bantu Alvin membeli PC Gaming impiannya",
@@ -34,7 +38,9 @@ module.exports = {
         long: 0,
         balance: 0,
         image: "https://w0.peakpx.com/wallpaper/144/852/HD-wallpaper-pc-gamer-1-game-pc-gamer.jpg",
-        status: "incomplete"
+        status: "incomplete",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Bantu Kautsar membeli sepatu Air Jordan",
@@ -45,7 +51,9 @@ module.exports = {
         long: 0,
         balance: 0,
         image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bmlrZSUyMGpvcmRhbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-        status: "incomplete"
+        status: "incomplete",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Kesakitan!! Bantu Andi menyembuhkan luka dikakinya karena dipatil lele",
@@ -56,7 +64,9 @@ module.exports = {
         long: 0,
         balance: 0,
         image: "",
-        status: "incomplete"
+        status: "incomplete",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         title: "Mari kita bantu Junaedi menyembuhkan sakit hatinya karena diselingkuhi",
@@ -67,7 +77,9 @@ module.exports = {
         long: 0,
         balance: 0,
         image: "",
-        status: "incomplete"
+        status: "incomplete",
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
     ]
 

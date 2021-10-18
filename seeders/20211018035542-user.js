@@ -7,20 +7,20 @@ module.exports = {
       {
         username: 'admin',
         email: 'admin@mail.com',
-        password: encode('12345'),
+        password: encode('123456'),
         role: 'admin',
-        phoneNumber: '',
-        address: '',
+        phoneNumber: null,
+        address: 'Jakarta',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         username: 'jamban',
         email: 'jamban@mail.com',
-        password: encode('12345'),
+        password: encode('123456'),
         role: 'user',
-        phoneNumber: '',
-        address: '',
+        phoneNumber: null,
+        address: 'Jakarta',
         createdAt: new Date(),
         updatedAt: new Date()
       }
