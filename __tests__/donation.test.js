@@ -416,19 +416,39 @@ describe('donation feature', () => {
             .catch(err => console.log(err))
     })
 
-    test('update transaction Fail', (done) => {
+    test('update transaction Success', (done) => {
         const data = {
-            amount: 10000,
-            order_id: 'Postman-1578568851',
+            order_id: '1',
             status_code: 200,
-            gross_amount: '10000.00',
-            signature_key: "e78e2223638cb60dbdbc88d23deb9b927ac41be7263ab38758605bac834dc25425705543707504bfef0802914cfa3f5f538fa308d1f9086211c420e7892ba2ba",
-            server_key: 'VT-server-HJMpl9HLr_ntOKt5mRONdmKj',
+            gross_amount: '20000.00',
+            signature_key: "a99aeb86abbac3f0bdc5b98a82fb0f665b8d7d8f9cbc0be724b8297e6eca3e01438129c412e3665637621b654c628bc5cf22a1047cb8621d872f8d739fda5a75",
+            server_key: 'SB-Mid-server-DJaY67FuAlYFm7aiT045x-up',
             transaction_status: "settlement",
         }
 
         request(app)
-            .patch('/patchTransaction')
+            .post('/patchTransaction')
+            .send(data)
+            .then(res => {
+                expect(res.statusCode).toBe(200)
+                done()
+            })
+            .catch(err => console.log(err, '<<<<<<<<<<<'))
+
+    })
+
+    test('update transaction Fail 400 not match signature key', (done) => {
+        const data = {
+            order_id: '3',
+            status_code: 200,
+            gross_amount: '20000.00',
+            signature_key: "a99aeb86abbac3f0bdc5b98a82fb0f665b8d7d8f9cbc0be724b8297e6eca3e01438129c412e3665637621b654c628bc5cf22a1047cb8621d872f8d739fda5a75",
+            server_key: 'SB-Mid-server-DJaY67FuAlYFm7aiT045x-up',
+            transaction_status: "settlement",
+        }
+
+        request(app)
+            .post('/patchTransaction')
             .send(data)
             .then(res => {
                 expect(res.statusCode).toBe(400)
