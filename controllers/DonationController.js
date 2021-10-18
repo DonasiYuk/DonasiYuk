@@ -255,8 +255,9 @@ class DonationController {
                 donators.forEach(donator => {
                    sendMail(donator.User.email, 'Donation Report', `The Foundation have upload a report for your donation, Please kindly check the donation page`)
                 })
-                res.status(201).json({ newReport })
             }
+
+            res.status(201).json({ newReport })
         } catch (err) {
             next(err)
         }

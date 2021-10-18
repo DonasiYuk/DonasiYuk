@@ -59,8 +59,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(201)
                 done()
@@ -79,8 +84,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', invalidtoken)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(401)
                 expect(res.body).toHaveProperty('message')
@@ -99,8 +109,12 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -119,8 +133,12 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -139,8 +157,12 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -159,8 +181,12 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -179,8 +205,12 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -200,8 +230,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', '')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -221,8 +256,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', '')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -242,8 +282,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', '')
+            .field('lat', 1231231)
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -252,7 +297,7 @@ describe('donation feature', () => {
             .catch(err => console.log(err))
     })
 
-    test('create donation with empty description', (done) => {
+    test('create donation with empty lat', (done) => {
         const data = {
             title: 'untuk gacha',
             description: 'untuk beli gacha pou',
@@ -263,8 +308,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', '')
+            .field('long', 123123131)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
@@ -273,7 +323,7 @@ describe('donation feature', () => {
             .catch(err => console.log(err))
     })
 
-    test('create donation with empty description', (done) => {
+    test('create donation with empty long', (done) => {
         const data = {
             title: 'untuk gacha',
             description: 'untuk beli gacha pou',
@@ -284,8 +334,13 @@ describe('donation feature', () => {
 
         request(app)
             .post('/donations')
-            .send(data)
             .set('access_token', access_token)
+            .field('title', 'untuk gacha')
+            .field('description', 'untuk beli gacha pou')
+            .field('targetAmount', 100000)
+            .field('lat', 1231231)
+            .field('long', '')
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
