@@ -34,6 +34,7 @@ class UserController {
                     })
                     res.status(200).json({ access_token, role:data.role})
                 }else{
+                    console.log('password salah')
                     next({
                         name: 'Unauthenticated',
                         code: 401,
@@ -41,6 +42,7 @@ class UserController {
                     }) 
                 }
             }else{
+                console.log('email not found')
                 next({
                     name: 'Unauthenticated',
                     code: 401,
