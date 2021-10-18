@@ -377,7 +377,7 @@ describe('donation feature', () => {
             .send(data)
             .then(res => {
                 console.log(res);
-                expect(res.statusCode).toBe(200)
+                expect(res.statusCode).toBe(400)
                 expect(res.body).toHaveProperty('message')
                 done()
             })

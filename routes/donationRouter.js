@@ -6,7 +6,7 @@ const upload = require('../middlewares/multer')
 const imgKit = require('../middlewares/imgKit')
 
 router.get('/donations', DonationController.getListDonation)
-router.post('/donations', authe, upload.single("image"), imgKit, DonationController.createDonation)
+router.post('/donations', authe, DonationController.createDonation)
 router.get('/donations/:id', DonationController.getDonationById)
 router.put('/donations/:id', authe, DonationController.editDonation)
 
