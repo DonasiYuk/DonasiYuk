@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1634538302182" clover="3.2.0">
-  <project timestamp="1634538302183" name="All files">
-    <metrics statements="334" coveredstatements="264" conditionals="79" coveredconditionals="39" methods="46" coveredmethods="40" elements="459" coveredelements="343" complexity="0" loc="334" ncloc="334" packages="6" files="18" classes="18"/>
+<coverage generated="1634570587751" clover="3.2.0">
+  <project timestamp="1634570587751" name="All files">
+    <metrics statements="314" coveredstatements="252" conditionals="67" coveredconditionals="38" methods="43" coveredmethods="39" elements="424" coveredelements="329" complexity="0" loc="314" ncloc="314" packages="6" files="18" classes="18"/>
     <package name="DonasiYuk-server">
       <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\app.js">
@@ -18,9 +18,9 @@
       </file>
     </package>
     <package name="DonasiYuk-server.controllers">
-      <metrics statements="147" coveredstatements="103" conditionals="43" coveredconditionals="18" methods="18" coveredmethods="16"/>
+      <metrics statements="141" coveredstatements="93" conditionals="37" coveredconditionals="16" methods="17" coveredmethods="15"/>
       <file name="DonationController.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\controllers\DonationController.js">
-        <metrics statements="99" coveredstatements="68" conditionals="33" coveredconditionals="9" methods="10" coveredmethods="9"/>
+        <metrics statements="95" coveredstatements="59" conditionals="29" coveredconditionals="8" methods="9" coveredmethods="8"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -65,12 +65,12 @@
         <line num="115" count="0" type="stmt"/>
         <line num="118" count="3" type="stmt"/>
         <line num="119" count="3" type="stmt"/>
-        <line num="125" count="1" type="stmt"/>
-        <line num="126" count="1" type="stmt"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="128" count="1" type="stmt"/>
-        <line num="130" count="1" type="stmt"/>
-        <line num="132" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="126" count="0" type="stmt"/>
+        <line num="127" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="130" count="0" type="stmt"/>
+        <line num="132" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="133" count="0" type="stmt"/>
         <line num="134" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="135" count="0" type="stmt"/>
@@ -89,9 +89,9 @@
         <line num="167" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="168" count="0" type="stmt"/>
         <line num="170" count="0" type="stmt"/>
-        <line num="177" count="1" type="stmt"/>
-        <line num="184" count="1" type="stmt"/>
-        <line num="185" count="1" type="stmt"/>
+        <line num="177" count="0" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
+        <line num="185" count="0" type="stmt"/>
         <line num="190" count="1" type="stmt"/>
         <line num="191" count="1" type="stmt"/>
         <line num="192" count="1" type="stmt"/>
@@ -110,19 +110,15 @@
         <line num="236" count="1" type="stmt"/>
         <line num="238" count="1" type="stmt"/>
         <line num="239" count="1" type="stmt"/>
-        <line num="244" count="1" type="stmt"/>
-        <line num="245" count="1" type="stmt"/>
-        <line num="246" count="1" type="stmt"/>
-        <line num="247" count="1" type="stmt"/>
-        <line num="254" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="255" count="0" type="stmt"/>
-        <line num="256" count="0" type="stmt"/>
-        <line num="260" count="0" type="stmt"/>
+        <line num="244" count="2" type="stmt"/>
+        <line num="245" count="2" type="stmt"/>
+        <line num="246" count="2" type="stmt"/>
+        <line num="260" count="1" type="stmt"/>
         <line num="262" count="1" type="stmt"/>
         <line num="268" count="3" type="stmt"/>
       </file>
       <file name="UserController.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\controllers\UserController.js">
-        <metrics statements="48" coveredstatements="35" conditionals="10" coveredconditionals="9" methods="8" coveredmethods="7"/>
+        <metrics statements="46" coveredstatements="34" conditionals="8" coveredconditionals="8" methods="8" coveredmethods="7"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -147,8 +143,6 @@
         <line num="64" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
-        <line num="69" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="70" count="0" type="stmt"/>
         <line num="76" count="1" type="stmt"/>
         <line num="84" count="0" type="stmt"/>
         <line num="89" count="1" type="stmt"/>
@@ -174,7 +168,7 @@
       </file>
     </package>
     <package name="DonasiYuk-server.helpers">
-      <metrics statements="18" coveredstatements="15" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="5"/>
+      <metrics statements="15" coveredstatements="15" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
       <file name="bcryptjs.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\helpers\bcryptjs.js">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
@@ -188,57 +182,43 @@
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
-        <line num="9" count="28" type="stmt"/>
+        <line num="9" count="30" type="stmt"/>
         <line num="12" count="3" type="stmt"/>
       </file>
       <file name="nodemailer.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\helpers\nodemailer.js">
-        <metrics statements="8" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="28" count="3" type="stmt"/>
+        <line num="31" count="3" type="stmt"/>
       </file>
     </package>
     <package name="DonasiYuk-server.middlewares">
-      <metrics statements="75" coveredstatements="54" conditionals="25" coveredconditionals="15" methods="8" coveredmethods="6"/>
+      <metrics statements="64" coveredstatements="52" conditionals="21" coveredconditionals="16" methods="7" coveredmethods="6"/>
       <file name="authentication.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\middlewares\authentication.js">
-        <metrics statements="26" coveredstatements="16" conditionals="8" coveredconditionals="4" methods="2" coveredmethods="1"/>
+        <metrics statements="15" coveredstatements="15" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
-        <line num="5" count="34" type="stmt"/>
-        <line num="6" count="34" type="stmt"/>
-        <line num="7" count="34" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="36" type="stmt"/>
+        <line num="6" count="36" type="stmt"/>
+        <line num="7" count="36" type="cond" truecount="2" falsecount="0"/>
         <line num="8" count="6" type="stmt"/>
-        <line num="13" count="28" type="stmt"/>
-        <line num="14" count="28" type="stmt"/>
-        <line num="20" count="28" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="30" type="stmt"/>
+        <line num="14" count="30" type="stmt"/>
+        <line num="20" count="30" type="cond" truecount="2" falsecount="0"/>
         <line num="21" count="2" type="stmt"/>
-        <line num="26" count="26" type="stmt"/>
-        <line num="27" count="26" type="stmt"/>
-        <line num="30" count="8" type="stmt"/>
-        <line num="34" count="3" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
+        <line num="26" count="28" type="stmt"/>
+        <line num="27" count="28" type="stmt"/>
+        <line num="30" count="6" type="stmt"/>
         <line num="60" count="3" type="stmt"/>
       </file>
       <file name="errorHandler.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\middlewares\errorHandler.js">
-        <metrics statements="24" coveredstatements="18" conditionals="7" coveredconditionals="5" methods="2" coveredmethods="2"/>
+        <metrics statements="24" coveredstatements="15" conditionals="7" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="2" count="38" type="stmt"/>
         <line num="3" count="38" type="stmt"/>
-        <line num="5" count="38" type="cond" truecount="5" falsecount="2"/>
+        <line num="5" count="38" type="cond" truecount="4" falsecount="3"/>
         <line num="7" count="20" type="stmt"/>
         <line num="8" count="20" type="stmt"/>
         <line num="9" count="25" type="stmt"/>
@@ -246,9 +226,9 @@
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
         <line num="21" count="11" type="stmt"/>
         <line num="22" count="11" type="stmt"/>
         <line num="23" count="11" type="stmt"/>
@@ -258,26 +238,26 @@
         <line num="29" count="3" type="stmt"/>
         <line num="30" count="3" type="stmt"/>
         <line num="31" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
         <line num="39" count="3" type="stmt"/>
       </file>
       <file name="imgKit.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\middlewares\imgKit.js">
-        <metrics statements="16" coveredstatements="12" conditionals="4" coveredconditionals="1" methods="3" coveredmethods="2"/>
+        <metrics statements="16" coveredstatements="14" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
-        <line num="7" count="13" type="cond" truecount="1" falsecount="1"/>
-        <line num="8" count="13" type="stmt"/>
-        <line num="9" count="13" type="stmt"/>
-        <line num="10" count="13" type="stmt"/>
-        <line num="11" count="13" type="stmt"/>
-        <line num="13" count="13" type="stmt"/>
-        <line num="23" count="13" type="stmt"/>
-        <line num="24" count="13" type="stmt"/>
+        <line num="7" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="14" type="stmt"/>
+        <line num="9" count="14" type="stmt"/>
+        <line num="10" count="14" type="stmt"/>
+        <line num="11" count="14" type="stmt"/>
+        <line num="13" count="14" type="stmt"/>
+        <line num="23" count="14" type="stmt"/>
+        <line num="24" count="14" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
         <line num="48" count="3" type="stmt"/>
       </file>
       <file name="multer.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\middlewares\multer.js">
@@ -285,9 +265,9 @@
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
-        <line num="5" count="13" type="stmt"/>
-        <line num="7" count="13" type="cond" truecount="5" falsecount="1"/>
-        <line num="8" count="13" type="stmt"/>
+        <line num="5" count="14" type="stmt"/>
+        <line num="7" count="14" type="cond" truecount="5" falsecount="1"/>
+        <line num="8" count="14" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="14" count="3" type="stmt"/>
         <line num="18" count="3" type="stmt"/>
@@ -366,20 +346,20 @@
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
         <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
         <line num="10" count="3" type="stmt"/>
         <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
         <line num="13" count="3" type="stmt"/>
         <line num="15" count="3" type="stmt"/>
         <line num="17" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
         <line num="19" count="3" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
       </file>
       <file name="index.js" path="X:\Hacktiv8\Phase 3\MyFinalProject\DonasiYuk-server\routes\index.js">
         <metrics statements="8" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>

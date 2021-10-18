@@ -66,12 +66,12 @@ class UserController {
 
             const currentUser = await User.findByPk(id)
 
-            if(!currentUser) {
-                throw {
-                    name: 'Not Found',
-                    message: 'User Not Found'
-                }
-            }
+            // if(!currentUser) {
+            //     throw {
+            //         name: 'Not Found',
+            //         message: 'User Not Found'
+            //     }
+            // }
 
             res.status(200).json({
                 id: currentUser.id,
