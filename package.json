@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "npx jest --watchAll --detectOpenHandles --runInBand --coverage"
+    "test": "npx jest --watchAll --detectOpenHandles --runInBand --testTimeout=20000 --coverage"
   },
   "repository": {
     "type": "git",
