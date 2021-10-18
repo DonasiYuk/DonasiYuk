@@ -186,9 +186,18 @@ describe('user login test', () => {
         password: 'admin'
     }
 
-    const invalidParams = {
-        email: 'haha@hihi.com',
-        password: 'hihi'
+    const passwordSalah = {
+        email: 'admin@mail.com',
+        password: 'amdin'
+    }
+
+    const emailSalah = {
+        email: 'amdin@mail.com',
+        password: 'admin'
+    }
+
+    const emailKosong = {
+        password: 'admin'
     }
     
     beforeAll(done => {
@@ -214,10 +223,32 @@ describe('user login test', () => {
         })
     })
 
-    test('invalid parameters should return error status', (done) => {
+    test('Wrong Password should return error status', (done) => {
         request(app)
         .post('/users/login')
-        .send(invalidParams)
+        .send(passwordSalah)
+        .then(res => {
+            expect(res.statusCode).toBe(401)
+            expect(res.body.message).toBe('Email / Password incorrect')
+            done()
+        })
+    })
+
+    test('Wrong email should return error status', (done) => {
+        request(app)
+        .post('/users/login')
+        .send(emailSalah)
+        .then(res => {
+            expect(res.statusCode).toBe(401)
+            expect(res.body.message).toBe('Email / Password incorrect')
+            done()
+        })
+    })
+
+    test('Empty email should return error status', (done) => {
+        request(app)
+        .post('/users/login')
+        .send(emailKosong)
         .then(res => {
             expect(res.statusCode).toBe(401)
             expect(res.body.message).toBe('Email / Password incorrect')
