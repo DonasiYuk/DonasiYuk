@@ -6,7 +6,6 @@ const { sendMail } = require('../helpers/nodemailer') // usage: sendMail(email, 
 class DonationController {
 
     static async createDonation(req, res, next) {
-        console.log("masuk")
         try {
             const id = req.user.id
             const { title, description, targetAmount, lat, long, image } = req.body
@@ -21,7 +20,10 @@ class DonationController {
 
     static async getListDonation(req, res, next) {
         try {
-            const data = await Donation.findAll()
+            const data = await Donation.findAll({
+                include: [User, Transaction],
+                where:{status:"incomplete"}
+            })
             res.status(200).json(data)
         } catch (err) {
             next(err)

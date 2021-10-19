@@ -14,7 +14,7 @@ router.put('/donations/:id', authe, DonationController.editDonation)
 
 router.post('/transactions/:id', authe, DonationController.transaction)
 
-router.patch('/patchTransaction', DonationController.patchTransaction)
+router.post('/patchTransaction', DonationController.patchTransaction)
 
 router.get('/myDonation', authe, DonationController.userDonation)
 router.put('/withdraw/:id', authe, DonationController.withdraw)
