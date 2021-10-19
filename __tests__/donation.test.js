@@ -63,8 +63,8 @@ describe('donation feature', () => {
             .field('title', 'untuk gacha')
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(201)
@@ -88,8 +88,8 @@ describe('donation feature', () => {
             .field('title', 'untuk gacha')
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(401)
@@ -103,8 +103,8 @@ describe('donation feature', () => {
         const data = {
             description: 'untuk beli gacha pou',
             targetAmount: 100000,
-            lat: 1231231,
-            long: 123123131
+            lat: '1231231',
+            long: '123123131'
         }
 
         request(app)
@@ -112,8 +112,8 @@ describe('donation feature', () => {
             .set('access_token', access_token)
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -128,7 +128,7 @@ describe('donation feature', () => {
             title: 'untuk gacha',
             targetAmount: 100000,
             lat: 1231231,
-            long: 123123131
+            long: '123123131'
         }
 
         request(app)
@@ -136,8 +136,8 @@ describe('donation feature', () => {
             .set('access_token', access_token)
             .field('title', 'untuk gacha')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -152,7 +152,7 @@ describe('donation feature', () => {
             title: 'untuk gacha',
             description: 'untuk beli gacha pou',
             lat: 1231231,
-            long: 123123131
+            long: '123123131'
         }
 
         request(app)
@@ -160,8 +160,8 @@ describe('donation feature', () => {
             .set('access_token', access_token)
             .field('title', 'untuk gacha')
             .field('description', 'untuk beli gacha pou')
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -176,7 +176,7 @@ describe('donation feature', () => {
             title: 'untuk gacha',
             description: 'untuk beli gacha pou',
             targetAmount: 100000,
-            long: 123123131
+            long: '123123131'
         }
 
         request(app)
@@ -185,7 +185,7 @@ describe('donation feature', () => {
             .field('title', 'untuk gacha')
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
-            .field('long', 123123131)
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -209,7 +209,7 @@ describe('donation feature', () => {
             .field('title', 'untuk gacha')
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
+            .field('lat', '1231231')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -224,8 +224,8 @@ describe('donation feature', () => {
             title: '',
             description: 'untuk beli gacha pou',
             targetAmount: 100000,
-            lat: 1231231,
-            long: 123123131
+            lat: '1231231',
+            long: '123123131'
         }
 
         request(app)
@@ -234,8 +234,8 @@ describe('donation feature', () => {
             .field('title', '')
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -251,7 +251,7 @@ describe('donation feature', () => {
             description: '',
             targetAmount: 100000,
             lat: 1231231,
-            long: 123123131
+            long: '123123131'
         }
 
         request(app)
@@ -260,8 +260,8 @@ describe('donation feature', () => {
             .field('title', 'untuk gacha')
             .field('description', '')
             .field('targetAmount', 100000)
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -277,7 +277,7 @@ describe('donation feature', () => {
             description: 'untuk beli gacha pou',
             targetAmount: '',
             lat: 1231231,
-            long: 123123131
+            long: '123123131'
         }
 
         request(app)
@@ -286,8 +286,8 @@ describe('donation feature', () => {
             .field('title', 'untuk gacha')
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', '')
-            .field('lat', 1231231)
-            .field('long', 123123131)
+            .field('lat', '1231231')
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -303,7 +303,7 @@ describe('donation feature', () => {
             description: 'untuk beli gacha pou',
             targetAmount: 100000,
             lat: '',
-            long: 123123131
+            long: '123123131'
         }
 
         request(app)
@@ -313,7 +313,7 @@ describe('donation feature', () => {
             .field('description', 'untuk beli gacha pou')
             .field('targetAmount', 100000)
             .field('lat', '')
-            .field('long', 123123131)
+            .field('long', '123123131')
             .attach("image", "./assets/Logo_Hacktiv8.jpg")
             .then(res => {
                 expect(res.statusCode).toBe(400)
@@ -328,7 +328,7 @@ describe('donation feature', () => {
             title: 'untuk gacha',
             description: 'untuk beli gacha pou',
             targetAmount: 100000,
-            lat: 1231231,
+            lat: '1231231',
             long: ''
         }
 

@@ -16,13 +16,16 @@ function sendMail(email, subject, message){
         text: message
     }
     
-     mailTransporter.sendMail(options, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    })
+     mailTransporter.sendMail(options
+    //     , function (error, info) {
+    //     if (error) {
+    //         console.log(error);
+    //     } 
+    //     else {
+    //         console.log('Email sent: ' + info.response);
+    //     }
+    // }
+    )
 }
 
 module.exports = { sendMail }

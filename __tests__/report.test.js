@@ -93,4 +93,37 @@ describe('reporting feature', () => {
             })
     })
 
+    test('invalid donation should return failed', (done) => {
+        request(app)
+            .post('/report')
+            .set('access_token', access_token)
+            .field('description', 'Test Description')
+            .field('donationId', 10)
+            .attach("image", "./assets/Logo_Hacktiv8.jpg")
+            .then(res => {
+                expect(res.statusCode).toBe(500)
+                done()
+            })
+            .catch(err =>{
+                console.log(err)
+                done()
+            })
+    })
+
+    test('report without image should return failed', (done) => {
+        request(app)
+            .post('/report')
+            .set('access_token', access_token)
+            .field('description', 'Test Description')
+            .field('donationId', 1)
+            .then(res => {
+                expect(res.statusCode).toBe(500)
+                done()
+            })
+            .catch(err =>{
+                console.log(err)
+                done()
+            })
+    })
+
 })
