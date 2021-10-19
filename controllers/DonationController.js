@@ -6,6 +6,7 @@ const { sendMail } = require('../helpers/nodemailer') // usage: sendMail(email, 
 class DonationController {
 
     static async createDonation(req, res, next) {
+        console.log("masuk")
         try {
             const id = req.user.id
             const { title, description, targetAmount, lat, long, image } = req.body
@@ -30,7 +31,9 @@ class DonationController {
     static async getDonationById(req, res, next){
         try {
             const id = req.params.id
-            const getDonation = await Donation.findByPk(id)
+            const getDonation = await Donation.findByPk(id, {
+                include: [User, Transaction]
+            })
             if (!getDonation) {
                 throw {
                     name : 'Not Found',
