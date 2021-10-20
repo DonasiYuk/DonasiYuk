@@ -22,7 +22,8 @@ class DonationController {
         try {
             const data = await Donation.findAll({
                 include: [User, Transaction],
-                where:{status:"incomplete"}
+                where:{status:"incomplete"},
+                order:[['createdAt','ASC']]
             })
             res.status(200).json(data)
         } catch (err) {
