@@ -9,9 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-     static formatedPrice(balance) {
-      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(balance);
-    }
+     
     static associate(models) {
       // define association here
       Donation.belongsTo(models.User, { foreignKey: "userId" })
