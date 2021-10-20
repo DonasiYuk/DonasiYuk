@@ -6,7 +6,7 @@ module.exports = {
       {
         title: "Bantu Arsyad beli Lamborghini",
         description: "ayo bantu Arsyad mewujudkan membeli mobil impiannya dengan membiayai mobil beserta pajaknya",
-        targetAmount: "5.000.000.000",
+        targetAmount: 5000000000,
         userId: 2,
         lat: -6.385589,
         long: 106.830711,
@@ -19,7 +19,7 @@ module.exports = {
       {
         title: "Bantu Avianto memenuhi keperluan jambannya",
         description: "ayo kita bantu avianto untuk mewujudkan kebutuhan jamban yang diinginkannya",
-        targetAmount: "100.000.000",
+        targetAmount: 100000000,
         userId: 1,
         lat:  -6.241586,
         long: 106.992416,
@@ -32,7 +32,7 @@ module.exports = {
       {
         title: "Bantu Alvin membeli PC Gaming impiannya",
         description: "Alvin ingin mewujudkan PC Gaming impiannya, mari kita bantu!!",
-        targetAmount: "150.000.000",
+        targetAmount: 150000000,
         userId: 2,
         lat: -7.250445,
         long: 112.768845,
@@ -45,7 +45,7 @@ module.exports = {
       {
         title: "Bantu Kautsar membeli sepatu Air Jordan",
         description: "mari kita wujudkan keinginan Kautsar!!!",
-        targetAmount: "10.000.000",
+        targetAmount: 10000000,
         userId: 1,
         lat: -7.983908,
         long: 112.621391,
@@ -58,7 +58,7 @@ module.exports = {
       {
         title: "Kesakitan!! Bantu Andi menyembuhkan luka dikakinya karena dipatil lele",
         description: "mari kita bantu Andi untuk menyembuhkan kakinya",
-        targetAmount: "10.000",
+        targetAmount: 100000,
         userId: 2,
         lat: -6.263459,
         long: 106.815903 ,
@@ -71,7 +71,7 @@ module.exports = {
       {
         title: "Mari kita bantu Junaedi menyembuhkan sakit hatinya karena diselingkuhi",
         description: "Junaedi mempergoki pacarnya sedang selingkuh di pinggir rel kereta",
-        targetAmount: "2.000.000",
+        targetAmount: 2000000,
         userId: 1,
         lat: -6.225588,
         long:  106.798553 ,

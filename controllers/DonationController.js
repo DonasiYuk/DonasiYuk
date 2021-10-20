@@ -23,7 +23,7 @@ class DonationController {
             const data = await Donation.findAll({
                 include: [User, Transaction],
                 where:{status:"incomplete"},
-                order:[['createdAt','ASC']]
+                order:[['createdAt','DESC']]
             })
             res.status(200).json(data)
         } catch (err) {
@@ -136,7 +136,6 @@ class DonationController {
             let hash = await sha512(`${order_id}${status_code}${gross_amount}${process.env.MIDTRANSKEY}`)
 
             if (hash === signature_key) {// untuk melakukan verifikasi signature key
-                console.log('masuk');
                 if (transaction_status == 'capture' || transaction_status == 'settlement') {// untuk handdle yang transaksi sukses
                     const updatedTransaction = await Transaction.update({ status: "success" }, {
                         where: { id: order_id },
@@ -148,23 +147,41 @@ class DonationController {
                     const currentDonation = await Donation.findOne({
                         where: { id }
                     })
-                 
+                    
+                    const target = currentDonation.dataValues.targetAmount
                     const oldBalance = currentDonation.dataValues.balance
                     const newAmount = +gross_amount
-                    const updatedDonation = await Donation.update({ balance: oldBalance + newAmount }, {
-                        where: { id },
-                        transaction: t
-                    })
-                    console.log('masuk');
-                    if (updatedTransaction && updatedDonation) {
-                        await t.commit()
-                        res.status(200).json(updatedDonation)
+                    const newBalance = oldBalance + newAmount
+                    if (newBalance >= target) {
+                        const updatedDonation = await Donation.update({ balance: newBalance, status:"complete" }, {
+                            where: { id },
+                            transaction: t
+                        })
+                        if (updatedTransaction && updatedDonation) {
+                            await t.commit()
+                            res.status(200).json(updatedDonation)
+                        } else {
+                            throw {
+                                name: 'Not Found',
+                                message: 'transaction & donation not found'
+                            }
+                        }
                     } else {
-                        throw {
-                            name: 'Not Found',
-                            message: 'transaction & donation not found'
+                        const updatedDonation = await Donation.update({ balance: newBalance }, {
+                            where: { id },
+                            transaction: t
+                        })
+                        if (updatedTransaction && updatedDonation) {
+                            await t.commit()
+                            res.status(200).json(updatedDonation)
+                        } else {
+                            throw {
+                                name: 'Not Found',
+                                message: 'transaction & donation not found'
+                            }
                         }
                     }
+                    
 
                 } else if (transaction_status == 'cancel' || transaction_status == 'deny' || transaction_status == 'expire') { // untuk handdle yang transaksi gagal/cancel
                     const updatedTransaction = await Transaction.update({ status: "cancel" }, {
