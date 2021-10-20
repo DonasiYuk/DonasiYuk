@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       targetAmount: {
-        type: Sequelize.STRING
+        type: Sequelize.BIGINT
       },
       userId: {
         type: Sequelize.INTEGER,
