@@ -169,6 +169,25 @@ describe('register feature', () => {
             })
             .catch(err => console.log(err))
     })
+
+    test('register new user with same email', (done) => {
+
+        const registerUserTest = {
+            email: 'test@mail.com',
+            password: '12345',
+            username: 'test'
+        }
+
+        request(app)
+            .post('/users/register')
+            .send(registerUserTest)
+            .then(res => {
+                expect(res.statusCode).toBe(400)
+                expect(res.body).toHaveProperty('message')
+                done()
+            })
+            .catch(err => console.log(err))
+    })
 })
 
 describe('user login test', () => {

@@ -21,10 +21,10 @@ function errorHandler(err, req, res, next) {
             code = 401;
             message = err.message;
             return res.status(code).json({ message })
-        case 'Forbidden':
-            code = 403;
-            message = err.message;
-            return res.status(code).json({ message })
+        // case 'Forbidden':
+        //     code = 403;
+        //     message = err.message;
+        //     return res.status(code).json({ message })
         case 'Not Found':
             code = 404;
             message = err.message;
