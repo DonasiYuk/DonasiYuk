@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.46% </span>
+                <span class="strong">86.41% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>83/96</span>
+                <span class='fraction'>89/103</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">51.43% </span>
+                <span class="strong">53.85% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/35</span>
+                <span class='fraction'>21/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>9/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.46% </span>
+                <span class="strong">86.41% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>83/96</span>
+                <span class='fraction'>89/103</span>
             </div>
         
             
@@ -343,7 +343,11 @@
 <a name='L284'></a><a href='#L284'>284</a>
 <a name='L285'></a><a href='#L285'>285</a>
 <a name='L286'></a><a href='#L286'>286</a>
-<a name='L287'></a><a href='#L287'>287</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<a name='L287'></a><a href='#L287'>287</a>
+<a name='L288'></a><a href='#L288'>288</a>
+<a name='L289'></a><a href='#L289'>289</a>
+<a name='L290'></a><a href='#L290'>290</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -366,6 +370,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -608,16 +614,16 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -633,6 +639,7 @@
 const sha512 = require('js-sha512')
 const { Donation, User, Report, Transaction, sequelize } = require('../models')
 const { sendMail } = require('../helpers/nodemailer') // usage: sendMail(email, subject, message)
+const { Op } = require('sequelize')
 &nbsp;
 class DonationController {
 &nbsp;
@@ -651,18 +658,20 @@ class DonationController {
 &nbsp;
     static async getListDonation(req, res, next) {
         // try {
-            const data = await Donation.findAll({
-                include: [User, Transaction],
-                where:{status:"incomplete"},
-                order:[['createdAt','DESC']]
-            })
-            res.status(200).json(data)
+            console.log(req.user.id);
+        const {id} = req.user
+        const data = await Donation.findAll({
+            include: [User, Transaction],
+            where: { status: "incomplete", userId:{[Op.ne]:id} },
+            order: [['createdAt', 'DESC']]
+        })
+        res.status(200).json(data)
         // } catch (err) {
         //     next(err)
         // }
     }
 &nbsp;
-    static async getDonationById(req, res, next){
+    static async getDonationById(req, res, next) {
         try {
             const id = req.params.id
             const getDonation = await Donation.findByPk(id, {
@@ -670,8 +679,8 @@ class DonationController {
             })
             if (!getDonation) {
                 throw {
-                    name : 'Not Found',
-                    message : 'Donation is not found'
+                    name: 'Not Found',
+                    message: 'Donation is not found'
                 }
             }
             res.status(200).json(getDonation)
@@ -703,12 +712,12 @@ class DonationController {
                 }
                 )
                 res.status(200).json(
-                    {message : 'Update Donation success'}
+                    { message: 'Update Donation success' }
                 )
             } else {
                 throw {
-                    name : 'Not Found',
-                    message : 'Data is not found'
+                    name: 'Not Found',
+                    message: 'Data is not found'
                 }
             }
         } catch (err) {
@@ -770,18 +779,18 @@ class DonationController {
                         returning: true,
                         transaction: t
                     })
-                    
+&nbsp;
                     const id = updatedTransaction[1][0].dataValues.donationId
                     const currentDonation = await Donation.findOne({
                         where: { id }
                     })
-                    
+&nbsp;
                     const target = currentDonation.dataValues.targetAmount
                     const oldBalance = currentDonation.dataValues.balance
                     const newAmount = +gross_amount
                     const newBalance = oldBalance + newAmount
                     <span class="missing-if-branch" title="if path not taken" >I</span>if (newBalance &gt;= target) {
-                        const updatedDonation = <span class="cstat-no" title="statement not covered" >await Donation.update({ balance: newBalance, status:"complete" }, {</span>
+                        const updatedDonation = <span class="cstat-no" title="statement not covered" >await Donation.update({ balance: newBalance, status: "complete" }, {</span>
                             where: { id },
                             transaction: t
                         })
@@ -809,7 +818,7 @@ class DonationController {
                             }
                         }
                     }
-                    
+&nbsp;
 &nbsp;
                 } else <span class="cstat-no" title="statement not covered" >if (transaction_status == 'cancel' || transaction_status == 'deny' || transaction_status == 'expire') { // untuk handdle yang transaksi gagal/cancel</span>
                     const updatedTransaction = <span class="cstat-no" title="statement not covered" >await Transaction.update({ status: "cancel" }, {</span>
@@ -844,7 +853,7 @@ class DonationController {
                 where: {
                     userId: id
                 },
-                include: [ User ]
+                include: [User]
             })
 &nbsp;
             res.status(200).json(userDonations)
@@ -858,7 +867,7 @@ class DonationController {
             const { id } = req.params;
             // const { withdrawalAmount } = req.body;
             const { email } = req.user;
-            
+&nbsp;
             const donation = await Donation.findByPk(id)
 &nbsp;
             if (!donation) {
@@ -870,7 +879,7 @@ class DonationController {
 &nbsp;
             // const updatedBalance = donation.balance - withdrawalAmount
 &nbsp;
-            const updatedDonation = await Donation.update({ balance: 0, status: 'complete'}, {
+            const updatedDonation = await Donation.update({ balance: 0, status: 'closed' }, {
                 where: { id },
                 returning: true
             })
@@ -889,23 +898,23 @@ class DonationController {
             next(err)
         }
     }
-        
+&nbsp;
     static async reporting(req, res, next) {
         try {
             const { donationId, image, description } = req.body
             const newReport = await Report.create({ donationId, image, description })
-            // const donators = await Transaction.findAll({
-            //     where:{
-            //         donationId
-            //     },
-            //     include: [User]
-            // })
+            const donators = await Transaction.findAll({
+                where:{
+                    donationId
+                },
+                include: [User]
+            })
 &nbsp;
-            // if (newReport &amp;&amp; donators) {
-            //     donators.forEach(donator =&gt; {
-            //        sendMail(donator.User.email, 'Donation Report', `The Foundation have upload a report for your donation, Please kindly check the donation page`)
-            //     })
-            // }
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (newReport &amp;&amp; donators) {
+                donators.forEach(<span class="fstat-no" title="function not covered" >do</span>nator =&gt; {
+<span class="cstat-no" title="statement not covered" >                   sendMail(donator.User.email, 'Donation Report', `The Foundation have upload a report for your donation, Please kindly check the donation page`)</span>
+                })
+            }
 &nbsp;
             res.status(201).json({ newReport })
         } catch (err) {
@@ -922,7 +931,7 @@ module.exports = DonationController;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 08:41:36 GMT+0700 (Western Indonesia Time)
+                at Thu Oct 21 2021 12:01:17 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

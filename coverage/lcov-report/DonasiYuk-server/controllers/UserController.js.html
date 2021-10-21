@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.08% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/37</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.08% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/37</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
@@ -311,11 +311,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -328,9 +323,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -460,37 +460,37 @@ class UserController {
         // }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    st</span>atic async googleLogin(req, res, next) {
-        // try {
-            const idToken = <span class="cstat-no" title="statement not covered" >req.body.idToken;</span>
-            let payload = <span class="cstat-no" title="statement not covered" >await fetchGoogleUser(idToken);</span>
-            let { email, name } = <span class="cstat-no" title="statement not covered" >payload;</span>
+    // static async googleLogin(req, res, next) {
+    //     // try {
+    //         const idToken = req.body.idToken;
+    //         let payload = await fetchGoogleUser(idToken);
+    //         let { email, name } = payload;
 &nbsp;
-            let user = <span class="cstat-no" title="statement not covered" >await User.findOrCreate({</span>
-                where: {
-                    email
-                },
-                defaults: {
-                    username: name,
-                    email,
-                    role: "user",
-                    password: "12345",
-                    phoneNumber: "",
-                    address: ""
-                }
-            })
-            let access_token = <span class="cstat-no" title="statement not covered" >sign({ id: user[0].id, email: user[0].email });</span>
-<span class="cstat-no" title="statement not covered" >            req.headers.access_token = access_token;</span>
-<span class="cstat-no" title="statement not covered" >            res.status(200).json({ </span>
-                access_token,
-                username: user[0].username,
-                role: user[0].role,
-                userId: user[0].id
-            });
-        // } catch (err) {
-        //     next(err)
-        // }
-    }
+    //         let user = await User.findOrCreate({
+    //             where: {
+    //                 email
+    //             },
+    //             defaults: {
+    //                 username: name,
+    //                 email,
+    //                 role: "user",
+    //                 password: "12345",
+    //                 phoneNumber: "",
+    //                 address: ""
+    //             }
+    //         })
+    //         let access_token = sign({ id: user[0].id, email: user[0].email });
+    //         req.headers.access_token = access_token;
+    //         res.status(200).json({ 
+    //             access_token,
+    //             username: user[0].username,
+    //             role: user[0].role,
+    //             userId: user[0].id
+    //         });
+    //     // } catch (err) {
+    //     //     next(err)
+    //     // }
+    // }
 &nbsp;
     static async historyTransaction(req, res, next) {
         // try {
@@ -517,7 +517,7 @@ module.exports = UserController;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 21 2021 08:41:36 GMT+0700 (Western Indonesia Time)
+                at Thu Oct 21 2021 12:01:17 GMT+0700 (Western Indonesia Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

@@ -1,7 +1,6 @@
 const { User, Transaction, Donation } = require('../models');
 const {decode, encode} = require('../helpers/bcryptjs');
 const {sign} = require('../helpers/jwt');
-// const fetchGoogleUser = require('../middlewares/googleAuth');
 
 class UserController {
     static async register(req, res, next) {
@@ -99,37 +98,6 @@ class UserController {
         // }
     }
 
-    static async googleLogin(req, res, next) {
-        // try {
-            const idToken = req.body.idToken;
-            let payload = await fetchGoogleUser(idToken);
-            let { email, name } = payload;
-
-            let user = await User.findOrCreate({
-                where: {
-                    email
-                },
-                defaults: {
-                    username: name,
-                    email,
-                    role: "user",
-                    password: "12345",
-                    phoneNumber: "",
-                    address: ""
-                }
-            })
-            let access_token = sign({ id: user[0].id, email: user[0].email });
-            req.headers.access_token = access_token;
-            res.status(200).json({ 
-                access_token,
-                username: user[0].username,
-                role: user[0].role,
-                userId: user[0].id
-            });
-        // } catch (err) {
-        //     next(err)
-        // }
-    }
 
     static async historyTransaction(req, res, next) {
         // try {

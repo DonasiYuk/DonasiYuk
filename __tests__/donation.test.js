@@ -606,7 +606,7 @@ describe('withdraw feature', () => {
             })
             .then(res => {
                 expect(res.statusCode).toBe(200)
-                expect(res.body.status).toBe('complete')
+                expect(res.body.status).toBe('closed')
                 done()
             })
     })
