@@ -15,7 +15,6 @@ class UserController {
                 email
             })
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
@@ -44,7 +43,6 @@ class UserController {
                     }) 
                 }
             }else{
-                console.log('email not found')
                 next({
                     name: 'Unauthenticated',
                     code: 401,
@@ -53,7 +51,6 @@ class UserController {
             }
         })
         .catch(err =>{
-            console.log(err, '<<< error')
             next({
                 name: 'Unauthenticated',
                 code: 401,
@@ -63,7 +60,7 @@ class UserController {
     }
 
     static async userProfile(req, res, next) {
-        try {
+        // try {
             const { id } = req.user;
 
             const currentUser = await User.findByPk(id)
@@ -82,13 +79,13 @@ class UserController {
                 phoneNumber: currentUser.phoneNumber,
                 address: currentUser.address
             })
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     }
 
     static async editUser(req, res, next) {
-        try {
+        // try {
             let { username, email, phoneNumber, address, role} = req.body;
 
             const updatedUser = await User.update({ username, email, phoneNumber, address, role}, {
@@ -97,13 +94,13 @@ class UserController {
             });
 
             res.status(200).json(updatedUser[1][0])
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     }
 
     static async googleLogin(req, res, next) {
-        try {
+        // try {
             const idToken = req.body.idToken;
             let payload = await fetchGoogleUser(idToken);
             let { email, name } = payload;
@@ -129,13 +126,13 @@ class UserController {
                 role: user[0].role,
                 userId: user[0].id
             });
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     }
 
     static async historyTransaction(req, res, next) {
-        try {
+        // try {
             const { id } = req.user;
 
             const userTransactions = await User.findOne({
@@ -146,9 +143,9 @@ class UserController {
                 }]
             })
             res.status(200).json(userTransactions)
-        } catch (err) {
-            next(err)
-        }
+        // } catch (err) {
+        //     next(err)
+        // }
     }
 }
 

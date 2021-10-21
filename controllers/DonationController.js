@@ -2,6 +2,7 @@ const midtransClient = require('midtrans-client')
 const sha512 = require('js-sha512')
 const { Donation, User, Report, Transaction, sequelize } = require('../models')
 const { sendMail } = require('../helpers/nodemailer') // usage: sendMail(email, subject, message)
+const { Op } = require('sequelize')
 
 class DonationController {
 
@@ -19,19 +20,21 @@ class DonationController {
     }
 
     static async getListDonation(req, res, next) {
-        try {
-            const data = await Donation.findAll({
-                include: [User, Transaction],
-                where:{status:"incomplete"},
-                order:[['createdAt','DESC']]
-            })
-            res.status(200).json(data)
-        } catch (err) {
-            next(err)
-        }
+        // try {
+            console.log(req.user.id);
+        const {id} = req.user
+        const data = await Donation.findAll({
+            include: [User, Transaction],
+            where: { status: "incomplete", userId:{[Op.ne]:id} },
+            order: [['createdAt', 'DESC']]
+        })
+        res.status(200).json(data)
+        // } catch (err) {
+        //     next(err)
+        // }
     }
 
-    static async getDonationById(req, res, next){
+    static async getDonationById(req, res, next) {
         try {
             const id = req.params.id
             const getDonation = await Donation.findByPk(id, {
@@ -39,8 +42,8 @@ class DonationController {
             })
             if (!getDonation) {
                 throw {
-                    name : 'Not Found',
-                    message : 'Donation is not found'
+                    name: 'Not Found',
+                    message: 'Donation is not found'
                 }
             }
             res.status(200).json(getDonation)
@@ -72,12 +75,12 @@ class DonationController {
                 }
                 )
                 res.status(200).json(
-                    {message : 'Update Donation success'}
+                    { message: 'Update Donation success' }
                 )
             } else {
                 throw {
-                    name : 'Not Found',
-                    message : 'Data is not found'
+                    name: 'Not Found',
+                    message: 'Data is not found'
                 }
             }
         } catch (err) {
@@ -121,7 +124,6 @@ class DonationController {
                 res.status(201).json(trx)
             }
         } catch (err) {
-            console.log(err);
             next(err)
         }
 
@@ -130,11 +132,9 @@ class DonationController {
     static async patchTransaction(req, res, next) {
         const t = await sequelize.transaction()
         try {
-            console.log(req.body);
             const { order_id, status_code, gross_amount, signature_key, transaction_status, } = req.body
 
             let hash = await sha512(`${order_id}${status_code}${gross_amount}${process.env.MIDTRANSKEY}`)
-
             if (hash === signature_key) {// untuk melakukan verifikasi signature key
                 if (transaction_status == 'capture' || transaction_status == 'settlement') {// untuk handdle yang transaksi sukses
                     const updatedTransaction = await Transaction.update({ status: "success" }, {
@@ -142,18 +142,18 @@ class DonationController {
                         returning: true,
                         transaction: t
                     })
-                    
+
                     const id = updatedTransaction[1][0].dataValues.donationId
                     const currentDonation = await Donation.findOne({
                         where: { id }
                     })
-                    
+
                     const target = currentDonation.dataValues.targetAmount
                     const oldBalance = currentDonation.dataValues.balance
                     const newAmount = +gross_amount
                     const newBalance = oldBalance + newAmount
                     if (newBalance >= target) {
-                        const updatedDonation = await Donation.update({ balance: newBalance, status:"complete" }, {
+                        const updatedDonation = await Donation.update({ balance: newBalance, status: "complete" }, {
                             where: { id },
                             transaction: t
                         })
@@ -181,7 +181,7 @@ class DonationController {
                             }
                         }
                     }
-                    
+
 
                 } else if (transaction_status == 'cancel' || transaction_status == 'deny' || transaction_status == 'expire') { // untuk handdle yang transaksi gagal/cancel
                     const updatedTransaction = await Transaction.update({ status: "cancel" }, {
@@ -216,7 +216,7 @@ class DonationController {
                 where: {
                     userId: id
                 },
-                include: [ User ]
+                include: [User]
             })
 
             res.status(200).json(userDonations)
@@ -230,7 +230,7 @@ class DonationController {
             const { id } = req.params;
             // const { withdrawalAmount } = req.body;
             const { email } = req.user;
-            
+
             const donation = await Donation.findByPk(id)
 
             if (!donation) {
@@ -242,7 +242,7 @@ class DonationController {
 
             // const updatedBalance = donation.balance - withdrawalAmount
 
-            const updatedDonation = await Donation.update({ balance: 0, status: 'complete'}, {
+            const updatedDonation = await Donation.update({ balance: 0, status: 'closed' }, {
                 where: { id },
                 returning: true
             })
@@ -258,11 +258,10 @@ class DonationController {
 
             res.status(200).json(updatedDonation[1][0])
         } catch (err) {
-            console.log(err);
             next(err)
         }
     }
-        
+
     static async reporting(req, res, next) {
         try {
             const { donationId, image, description } = req.body

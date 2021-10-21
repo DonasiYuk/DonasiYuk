@@ -7,7 +7,7 @@ const invalidtoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiO
 
 beforeAll(() => {
     User.destroy({ where: {}, truncate: true, cascade: true, restartIdentity: true })
-    Transaction.destroy({ where: {}, truncate: true, cascade: true, restartIdentity: true })
+    // Transaction.destroy({ where: {}, truncate: true, cascade: true, restartIdentity: true })
 })
 
 describe('donation feature', () => {
@@ -421,8 +421,8 @@ describe('donation feature', () => {
             order_id: '1',
             status_code: 200,
             gross_amount: '20000.00',
-            signature_key: "a99aeb86abbac3f0bdc5b98a82fb0f665b8d7d8f9cbc0be724b8297e6eca3e01438129c412e3665637621b654c628bc5cf22a1047cb8621d872f8d739fda5a75",
-            server_key: 'SB-Mid-server-DJaY67FuAlYFm7aiT045x-up',
+            signature_key: "c11cc1343589fa3a063ba825661d90ac9a7f2be5edc3359cb2df7f638ddce5701d2cf825d728667d06df9e2de6eced6a76cee2d18c057420f9ce21de87a4cc4c",
+            server_key: 'SB-Mid-server-gH99PffZO7jXs_5na5hjQIrF',
             transaction_status: "settlement",
         }
 
@@ -462,6 +462,7 @@ describe('donation feature', () => {
     test('200 GET/donation', done => {
         request(app)
             .get('/donations')
+            .set('access_token', access_token)
             .then(res => {
                 const { status, body } = res
                 expect(status).toBe(200)
